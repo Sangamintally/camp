@@ -1,0 +1,58 @@
+<!--Campground template-->
+<% include ../partials/header %>
+
+    <% if(currentUser && currentUser.isAdmin) { %>
+        <h1>You're Admin.</h1>
+    <% } %>
+    
+<!--<div class="container">-->
+    <header class="jumbotron">
+        <div class="container"> 
+            <h1>Welcome to YelpCamp!</h1>
+            <p>View our hand-picked campgrounds from all over the world.</p>
+            <p>
+                <a class="button btn-primary btn-lg" href="/campgrounds/new">Add New Campground</a>
+            </p>
+            
+            <!--Seach campgrounds-->
+            <p>
+                <form action="/campgrounds" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="campground search..." class="form-control">
+                        <input type="submit" value="Search" class="btn btn-default">
+                    </div>
+                </form>
+            </p>
+            
+        </div>
+    </header>
+    
+    
+    <div class="row text-center flex-wrap" id="campground-grid" style="display:flex; flex-wrap: wrap;">
+        <div class="col-md-12 col-sm-6">
+            <% if(noMatch !== null) { %>
+                <h3><%= noMatch %></h3>
+            <% } %>
+        </div>
+
+        <% campgrounds.forEach(function(campground){ %>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4 flex-wrap">
+
+                <!--card-->
+                <div class="card">
+                  <img class="card-img-top" src="<%= campground.image %>" alt="<%= campground.name %>">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= campground.name %></h5>
+                    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
+                  </div>
+                </div>
+                
+            </div>
+        <% }); %>
+    </div>
+<!--</div>-->
+
+
+
+<% include ../partials/footer %>
