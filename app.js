@@ -24,7 +24,8 @@ var commentRoutes     = require("./routes/comments"),
 // seedDB();  //seed the DB
 
 // In terminal-> export DATABASEURL=mongodb://localhost/yelp_camp_v14   //OFFLINE_DATABASE
-mongoose.connect(process.env.DATABASEURL); 
+var url = process.env.DATABASEUR || "mongodb://localhost/yelp_camp_v14"; //in-case, env is not set up.
+mongoose.connect(url); 
 // mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds247058.mlab.com:47058/yelpcamp"); //ONLINE-DATABASE (mLab)
 
 app.use(bodyParser.urlencoded({ extended: true }));
